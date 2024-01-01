@@ -1,0 +1,44 @@
+[
+  {
+    "name": "jellyfin",
+    "image": "docker.io/jellyfin/jellyfin:latest",
+    "volumes": [
+      ["/home/host/.appdata/jellyfin/cache", "/cache"],
+      ["/home/host/.appdata/jellyfin/config", "/config"]
+    ],
+    "ports": [
+      [8096, 8096, "tcp"]
+    ],
+    "options": [
+      ["user", "$(id -u):$(id -g)"],
+      ["mount", "type=bind,source=/media/usb0/media/video,destination=/media_0,ro=true,relabel=private"],
+      ["mount", "type=bind,source=/media/usb1/media/video,destination=/media_1,ro=true,relabel=private"]
+    ]
+  },
+  {
+    "name": "qbittorrent",
+    "image": "lscr.io/linuxserver/qbittorrent:latest",
+    "envs": [
+      ["PUID", "$(id -u)"],
+      ["PGID", "$(id -g)"],
+      ["TZ", "Etc/UTC"],
+      ["WEB_UI_PORT", "8080"]
+    ],
+    "volumes": [
+      ["/home/host/.appdata/qbittorrent/config", "/config"],
+      ["/home/host/downloads", "/downloads"]
+    ],
+    "ports": [
+      [8080, 8080, "tcp"],
+      [6881, 6881, "tcp"],
+      [6881, 6881, "udp"]
+    ]
+  },
+  {
+    "name": "torrent-sniff",
+    "image": "localhost/torrent-sniff:latest",
+    "ports": [
+      [8090, 8080, "tcp"]
+    ]
+  }
+]

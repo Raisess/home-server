@@ -1,0 +1,2 @@
+sdX (500gb) -> usb0
+sdY (250gb) -> usb1

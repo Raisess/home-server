@@ -17,7 +17,11 @@ class BlockDevice:
     return self.__size
 
   def mount(self, target: str) -> None:
-    os.system(f"mount /dev/{self.__name} /media/{target}")
+    path = f"/media/{target}"
+    if not os.path.exists(path):
+      os.makedirs(path)
+
+    os.system(f"mount /dev/{self.__name} {path}")
 
 
 if __name__ == "__main__":

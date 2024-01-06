@@ -11,7 +11,8 @@
     ],
     "options": [
       ["user", "$(id -u):$(id -g)"],
-      ["mount", "type=bind,source=/media/usb0/media/video,destination=/media_0,ro=true,relabel=private"]
+      ["mount", "type=bind,source=/media/usb0/media/video,destination=/media_0,ro=true,relabel=private"],
+      ["mount", "type=bind,source=/media/usb1/media/video,destination=/media_1,ro=true,relabel=private"]
     ]
   },
   {
